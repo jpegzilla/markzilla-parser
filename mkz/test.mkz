@@ -1,0 +1,17 @@
+#h1 This is a markzilla test file.
+
+#p contained in this file are some markzilla [b markup indicators]. [b Markup indicators] are things like "[\i]" or "[\b]" or "[\c]" that indicate that certain markup is meant to be handled differently by the parser.
+line in paragraph.
+line in paragraph.
+
+#img path/to/image
+
+#p let's take a look at some other things.
+
+#h2 header size 2
+
+#h3 header size 3
+
+#p [d This] paragraph is an example of the drop-cap feature. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+
+// this is a comment. this line will be skipped by the parser.

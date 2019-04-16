@@ -1,17 +1,36 @@
-#h1 This is a markzilla test file.
+#h1 [i This] is a [b markzilla] test file. This is the [sui first ever] [ib markzilla] file.
 
-#p contained in this file are some markzilla [b markup indicators]. [b Markup indicators] are things like "[\i]" or "[\b]" or "[\c]" that indicate that certain markup is meant to be handled differently by the parser.
+#p contained in this file are some markzilla [b markup indicators]. [b Markup indicators] are things like "[\i]", "[\b]", "[\c]", "[\d]", "[\u]", "[\s]", that indicate that certain markup is meant to be handled differently by the parser.
 line in paragraph.
 line in paragraph.
 
-#img path/to/image
+#img path/to/image short image caption
 
+#p in this paragraph, [\this set of brackets is escaped.] that prevents it from being interpreted as a markup indicator.
+
+#p let's take a look at some [b other] [a things](link) [a things](link).
 #p let's take a look at some other things.
 
 #h2 header size 2
 
 #h3 header size 3
 
-#p [d This] paragraph is an example of the drop-cap feature. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+#p [d This] paragraph is an (example) of the drop-cap (feature). Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in [a reprehenderit](this/url.img) in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
 
 // this is a comment. this line will be skipped by the parser.
+
+#p this
+paragraph
+goes
+down like
+This
+
+#code this will be parsed as a <code></code> block in html.
+it
+goes
+down.
+
+#p this paragraph contains a link, right [a here, and it links to](this.url/right-here) and [a another.](link)
+
+#p [b This] is the last paragraph. It starts with a bolded word.
+this continues the [i paragraph] that began on the last line.

@@ -161,7 +161,6 @@ const markzilla = mkz = {
               currentLink = el[g];
               linkText = currentLink.match(matchesLinkText)[0].replace(/(\[a\s|\])/gi, '');
               linkAdd = currentLink.match(matchesLinkAdd)[0].replace(/(\(|\))/gi, '');
-              console.log(linkText);
               elToLast = (currentLink.length + elPosition);
               finalLine = elements[i].substr(0, elPosition) + `<a target="_blank" href="${linkAdd}">${linkText}</a>` + elements[i].substr(elToLast, lineLength);
               elements[i] = finalLine;
@@ -189,7 +188,7 @@ const markzilla = mkz = {
   },
 
   decon: (html) => {
-    console.log('converting from .html to .mkz');
+    // goes back from html layout to .mkz
     // why would I need this though?
   },
 
@@ -221,7 +220,6 @@ const markzilla = mkz = {
 
   saveToPost: (json) => {
     if (json.length !== 0) {
-      console.log('saving as json post.');
       articleDate = yyyymmdd().yyyymmdd;
       articleTitle = Object.values(json[0])[0];
       postObject = {

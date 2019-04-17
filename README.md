@@ -1,6 +1,9 @@
 ## what is this?
 this is a parser for a markup 'language' I created called markzilla. I did it mainly as a learning exercise -- I learned everything I'll ever need to know about regex, for example. but if you need a simple markup language that outputs a JSON object full of HTML elements (and who doesn't?) then this project may be useful to you.
 
+### quick start
+clone the repo, open the folder. open index.html. open your console and run mkz.parse(filePath), then mkz.saveToPost(elements), then mkz.insertPost(postObject) to get a basic idea of what it does.
+
 ### how markzilla markup (.mkz) syntax works
 markzilla has a syntax designed specifically around writing articles/posts/documents that will need to be rendered as HTML. therefore all the markzilla *markup indicators* are based on HTML elements.
 

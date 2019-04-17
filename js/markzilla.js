@@ -35,10 +35,28 @@ const parseDateString = (str) => {
 const markzilla = mkz = {
   parse: (filePath) => {
     if (filePath) {
+      // maybe I'll go back to jQuery just for this. this get request is pretty succinct.
+      // $.get(filePath, (data) => {
+      //   inputFile = data;
+      // }).
       elements = [];
-      $.get(filePath, (data) => {
-        inputFile = data;
-      }).then((inputFile) => {
+      const getFile = (filePath) => {
+        return new Promise(function(resolve, reject) {
+          var xhr = new XMLHttpRequest();
+          xhr.open('GET', filePath);
+          xhr.onload = () => {
+            if (xhr.status >= 200 && xhr.status < 300) {
+              resolve(xhr.response);
+            } else {
+              reject(xhr.statusText);
+            }
+          }
+          xhr.onerror = () => reject(xhr.statusText)
+          xhr.send();
+        });
+      }
+
+      getFile(filePath).then((inputFile) => {
         let lines = inputFile.split('\n');
         let arrayOfLines = [];
         for (var i = 0; i < lines.length; i++) {
@@ -199,11 +217,11 @@ const markzilla = mkz = {
       let date = Object.keys(postObject)[0];
       let body = Object.values(postObject)[0].body;
       let parsedDate = parseDateString(date);
-      $('.mkzTitle').html(title)
-      $('.mkzDate').text(parsedDate.y + " " + parsedDate.m + " " + parsedDate.d + " ");
+      document.querySelector('.mkzTitle').innerHTML = title;
+      document.querySelector('.mkzDate').textContent = parsedDate.y + " " + parsedDate.m + " " + parsedDate.d + " ";
       for (var i = 0; i < body.length; i++) {
         if (body[i]) {
-          $('.mkzBody').append(body[i]);
+          document.querySelector('.mkzBody').innerHTML = document.querySelector('.mkzBody').innerHTML + body[i];
         } else {
           continue;
         }

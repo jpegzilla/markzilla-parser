@@ -14,8 +14,8 @@
     </header>
     <main>
       <article class="initial">
-        <h1 class="mkzTitle">TITLE OF ARTICLE</h1>
-        <h2 class="mkzDate">date</h2>
+        <h1 class="mkzTitle"></h1>
+        <h2 class="mkzDate"></h2>
         <div class="mkzBody">
 
         </div>
@@ -30,6 +30,9 @@
     let currYear = new Date().getFullYear();
     let currYearString = (currYear.toString() == '2019' ? '2019' : '2019 - ' + curryear);
     document.querySelector('.copyright').textContent = currYearString;
+    document.querySelector('.name').addEventListener('click', (e) => {
+        document.querySelector('.icons').classList.toggle('visible')
+      });
     </script>
   </body>
 </html>

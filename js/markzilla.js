@@ -1,10 +1,8 @@
 let jsonObject;
 let inputFile;
-let filePath = "/../mkz/test.mkz";
+let filePath = mkzOptions.file;
 let postObject = {};
 let elements = [];
-let noelements = 0;
-posted = 0;
 
 const when = (conditionFunc, execFunc, interval) => {
   if (conditionFunc()) {
@@ -298,6 +296,7 @@ const markzilla = (mkz = {
     const returnelements = () => {
       markzilla.saveToPost(elements);
       markzilla.insertPost(postObject);
+      console.log({ post: postObject });
     };
 
     when(elementsready, returnelements, 2);
@@ -305,7 +304,7 @@ const markzilla = (mkz = {
     let end = window.performance.now();
     let time =
       "completed task in " + Math.ceil(end - start) * 0.001 + " seconds.";
-    return time;
+    return time, postObject;
   }
 });
 

@@ -22,7 +22,7 @@ and it will give you an array of numbered JSON objects containing the parsed `.m
 
 to a line that looks like this.
 
-`<h1><span class='i'>This</span> is a <span class='b'>markzilla</span> test file. This is the <span class='s u i'>first ever</span> <span class='i b'>markzilla</span> file.
-</h1>`
+```<h1><span class='i'>This</span> is a <span class='b'>markzilla</span> test file. This is the <span class='s u i'>first ever</span> <span class='i b'>markzilla</span> file.
+</h1>```
 
 it's a pretty straightforward `.mkz` to `.html` conversion. if for some reason you *actually* want to use this, like to make blog posts on a static site or something, please feel free. and if you need help or want me to put in a new feature, please get in touch. I'm online almost 24/7 these days.

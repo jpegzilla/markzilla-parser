@@ -3,6 +3,18 @@ let inputFile;
 let filePath = '/../mkz/test.mkz';
 let postObject = {};
 let elements = [];
+let noelements = 0;
+posted = 0;
+
+const when = (conditionFunc, execFunc, interval) => {
+  if (conditionFunc()) {
+    execFunc();
+  } else {
+    setTimeout(() => {
+      when(conditionFunc, execFunc, interval);
+    }, interval);
+  }
+}
 
 const yyyymmdd = () => {
   var x = new Date();
@@ -35,10 +47,6 @@ const parseDateString = (str) => {
 const markzilla = mkz = {
   parse: (filePath) => {
     if (filePath) {
-      // maybe I'll go back to jQuery just for this. this get request is pretty succinct.
-      // $.get(filePath, (data) => {
-      //   inputFile = data;
-      // }).
       elements = [];
       const getFile = (filePath) => {
         return new Promise(function(resolve, reject) {
@@ -108,8 +116,7 @@ const markzilla = mkz = {
 
           }
 
-        } // end loop
-        // const matchesHL = /(?:[^\'|\"])(\[.*?\])(?:[^\'|\"])/gi;
+        }
         const matchesHL = /(\[[^\\a].*?\])/gi;
         const matchesLinks = /(\[[a].*?\]\(.*?\))/gi;
         const matchesEsc = /(\[\\)/gi;
@@ -212,7 +219,7 @@ const markzilla = mkz = {
 
   insertPost: (postObject) => {
     if (Object.keys(postObject)[0]) {
-      var start = window.performance.now();
+      let start = window.performance.now();
       let title = Object.values(postObject)[0].title;
       let date = Object.keys(postObject)[0];
       let body = Object.values(postObject)[0].body;
@@ -226,8 +233,8 @@ const markzilla = mkz = {
           continue;
         }
       }
-      var end = window.performance.now();
-      var time = 'completed task in ' + (Math.floor(end - start) * 0.001) + ' seconds.';
+      let end = window.performance.now();
+      let time = 'completed task in ' + (Math.floor(end - start) * 0.001) + ' seconds.';
       return time;
     } else {
       console.warn('no postObject defined');
@@ -254,5 +261,30 @@ const markzilla = mkz = {
       console.warn('no json to save.');
       return false;
     }
+  },
+
+  createPost: (filePath) => {
+    let start = window.performance.now();
+    markzilla.parse(filePath)
+
+    const elementsready = () => {
+      return elements.length != 0;
+    }
+
+    const returnelements = () => {
+      markzilla.saveToPost(elements);
+      markzilla.insertPost(postObject);
+    }
+
+    when(elementsready, returnelements, 2)
+
+    let end = window.performance.now();
+    let time = 'completed task in ' + (Math.ceil(end - start) * 0.001) + ' seconds.';
+    return time;
   }
 }
+
+
+
+// markzilla.saveToPost(elements);
+// markzilla.insertPost(postObject);

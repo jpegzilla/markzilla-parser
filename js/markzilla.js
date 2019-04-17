@@ -284,7 +284,4 @@ const markzilla = mkz = {
   }
 }
 
-
-
-// markzilla.saveToPost(elements);
-// markzilla.insertPost(postObject);
+mkz.createPost(filePath);

@@ -42,6 +42,31 @@ const parseDateString = str => {
   };
 };
 
+const getStyle = filePath => {
+  return new Promise(function(resolve, reject) {
+    var xhr = new XMLHttpRequest();
+    xhr.open("GET", filePath);
+    xhr.onload = () => {
+      if (xhr.status >= 200 && xhr.status < 300) {
+        resolve(xhr.response);
+      } else {
+        reject(xhr.statusText);
+      }
+    };
+    xhr.onerror = () => reject(xhr.statusText);
+    xhr.send();
+  });
+};
+
+let respo;
+getStyle("/../json/styles.json").then(response => {
+  let style = document.getElementById("mkzStyle");
+  respo = JSON.parse(response);
+  stylesheet = respo.styles.find(e => Object.keys(e) == mkzOptions.style);
+  stylesheet = Object.values(stylesheet)[0];
+  style.innerHTML = stylesheet;
+});
+
 const markzilla = (mkz = {
   parse: filePath => {
     if (filePath) {

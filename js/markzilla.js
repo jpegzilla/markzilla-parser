@@ -1,8 +1,8 @@
-let jsonObject;
-let inputFile;
 let filePath = mkzOptions.file;
 let postObject = {};
 let elements = [];
+
+// i'll refactor all this stuff later don't worry about it
 
 const when = (conditionFunc, execFunc, interval) => {
   if (conditionFunc()) {
@@ -42,7 +42,7 @@ const parseDateString = str => {
   };
 };
 
-const getStyle = filePath => {
+const getFile = filePath => {
   return new Promise(function(resolve, reject) {
     var xhr = new XMLHttpRequest();
     xhr.open("GET", filePath);
@@ -58,7 +58,7 @@ const getStyle = filePath => {
   });
 };
 
-getStyle("/../json/styles.json").then(response => {
+getFile("/../json/styles.json").then(response => {
   let style = document.createElement("style");
   let resp = JSON.parse(response);
   stylesheet = resp.styles.find(e => Object.keys(e) == mkzOptions.style);
@@ -71,22 +71,7 @@ const markzilla = (mkz = {
   parse: filePath => {
     if (filePath) {
       elements = [];
-      const getFile = filePath => {
-        return new Promise(function(resolve, reject) {
-          var xhr = new XMLHttpRequest();
-          xhr.open("GET", filePath);
-          xhr.onload = () => {
-            if (xhr.status >= 200 && xhr.status < 300) {
-              resolve(xhr.response);
-            } else {
-              reject(xhr.statusText);
-            }
-          };
-          xhr.onerror = () => reject(xhr.statusText);
-          xhr.send();
-        });
-      };
-
+      let inputFile;
       getFile(filePath).then(inputFile => {
         let lines = inputFile.split("\n");
         let arrayOfLines = [];
@@ -321,7 +306,6 @@ const markzilla = (mkz = {
     const returnelements = () => {
       markzilla.saveToPost(elements);
       markzilla.insertPost(postObject);
-      console.log({ post: postObject });
     };
 
     when(elementsready, returnelements, 2);
@@ -332,5 +316,6 @@ const markzilla = (mkz = {
     return time, postObject;
   }
 });
-
+// immediately takes the .css and .mkz
+// and makes the "blog post"
 mkz.createPost(filePath);

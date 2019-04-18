@@ -58,13 +58,13 @@ const getStyle = filePath => {
   });
 };
 
-let respo;
 getStyle("/../json/styles.json").then(response => {
-  let style = document.getElementById("mkzStyle");
-  respo = JSON.parse(response);
-  stylesheet = respo.styles.find(e => Object.keys(e) == mkzOptions.style);
+  let style = document.createElement("style");
+  let resp = JSON.parse(response);
+  stylesheet = resp.styles.find(e => Object.keys(e) == mkzOptions.style);
   stylesheet = Object.values(stylesheet)[0];
   style.innerHTML = stylesheet;
+  document.body.appendChild(style);
 });
 
 const markzilla = (mkz = {

@@ -4,8 +4,6 @@ let styleName = mkzOptions.styleName;
 let postObject = {};
 let elements = [];
 
-// i'll refactor all this stuff later don't worry about it
-
 const when = (conditionFunc, execFunc, interval) => {
   if (conditionFunc()) {
     execFunc();
@@ -17,13 +15,13 @@ const when = (conditionFunc, execFunc, interval) => {
 };
 
 const yyyymmdd = () => {
-  var x = new Date();
-  var y = x.getFullYear().toString();
-  var m = (x.getMonth() + 1).toString();
-  var d = x.getDate().toString();
+  let x = new Date();
+  let y = x.getFullYear().toString();
+  let m = (x.getMonth() + 1).toString();
+  let d = x.getDate().toString();
   d.length == 1 && (d = "0" + d);
   m.length == 1 && (m = "0" + m);
-  var yyyymmdd = y + m + d;
+  let yyyymmdd = y + m + d;
   return {
     yyyymmdd,
     y,
@@ -34,7 +32,7 @@ const yyyymmdd = () => {
 
 const parseDateString = str => {
   if (!/^(\d){8}$/.test(str)) return "invalid date";
-  var y = str.substr(0, 4),
+  const y = str.substr(0, 4),
     m = str.substr(4, 2),
     d = str.substr(6, 2);
   return {
@@ -46,7 +44,7 @@ const parseDateString = str => {
 
 const getFile = filePath => {
   return new Promise(function(resolve, reject) {
-    var xhr = new XMLHttpRequest();
+    let xhr = new XMLHttpRequest();
     xhr.open("GET", filePath);
     xhr.onload = () => {
       if (xhr.status >= 200 && xhr.status < 300) {
@@ -74,11 +72,11 @@ const markzilla = (mkz = {
     return new Promise(function(resolve, reject) {
       if (filePath) {
         elements = [];
-        let inputFile;
+
         getFile(filePath).then(inputFile => {
           let lines = inputFile.split("\n");
           let arrayOfLines = [];
-          for (var i = 0; i < lines.length; i++) {
+          for (let i = 0; i < lines.length; i++) {
             if (/^#/.test(lines[i])) {
               let lastIndicator = lines[i];
               arrayOfLines.push(lastIndicator);
@@ -99,7 +97,7 @@ const markzilla = (mkz = {
               continue;
             }
           }
-          for (var i = 0; i < arrayOfLines.length; i++) {
+          for (let i = 0; i < arrayOfLines.length; i++) {
             lineText = arrayOfLines[i].split(/^#[a-z]*[0-9]*\s/)[1];
             lineType = arrayOfLines[i].split(/\s/)[0].split("#")[1];
             line = arrayOfLines[i];
@@ -131,7 +129,7 @@ const markzilla = (mkz = {
           const matchesEsc = /(\[\\)/gi;
           const matchesLinkText = /(\[[a].*?\])/;
           const matchesLinkAdd = /(\(.*?\))/;
-          for (var i = 0; i < elements.length; i++) {
+          for (let i = 0; i < elements.length; i++) {
             let hl = elements[i].match(matchesHL);
             let li = elements[i].match(matchesLinks);
 
@@ -139,7 +137,7 @@ const markzilla = (mkz = {
               let line = elements[i];
               let finalLine;
               el = elements[i].match(matchesHL);
-              for (var c = 0; c < el.length; c++) {
+              for (let c = 0; c < el.length; c++) {
                 currentHL = el[c];
                 elPosition = elements[i].indexOf(el[c]);
                 elType = el[c]
@@ -149,7 +147,6 @@ const markzilla = (mkz = {
                 elContent = el[c]
                   .replace(/(\[|\])/gi, "")
                   .substr(el[c].replace(/(\[|\])/gi, "").indexOf(" ") + 1);
-                let lineHTML = line.substr(elPosition, currentHL.length);
                 elToLast = currentHL.length + elPosition;
                 lineLength = line.length;
                 hLlength = currentHL.length;
@@ -161,7 +158,7 @@ const markzilla = (mkz = {
               }
 
               el = elements[i].match(matchesLinks);
-              for (var g = 0; g < el.length; g++) {
+              for (let g = 0; g < el.length; g++) {
                 line = elements[i];
                 lineLength = line.length;
                 elPosition = elements[i].indexOf(el[g]);
@@ -183,7 +180,7 @@ const markzilla = (mkz = {
               let line = elements[i];
               let finalLine;
               el = elements[i].match(matchesHL);
-              for (var c = 0; c < el.length; c++) {
+              for (let c = 0; c < el.length; c++) {
                 currentHL = el[c];
                 elPosition = elements[i].indexOf(el[c]);
                 elType = el[c]
@@ -193,7 +190,6 @@ const markzilla = (mkz = {
                 elContent = el[c]
                   .replace(/(\[|\])/gi, "")
                   .substr(el[c].replace(/(\[|\])/gi, "").indexOf(" ") + 1);
-                let lineHTML = line.substr(elPosition, currentHL.length);
                 elToLast = currentHL.length + elPosition;
                 lineLength = line.length;
                 hLlength = currentHL.length;
@@ -205,7 +201,7 @@ const markzilla = (mkz = {
               }
             } else if (li) {
               el = elements[i].match(matchesLinks);
-              for (var g = 0; g < el.length; g++) {
+              for (let g = 0; g < el.length; g++) {
                 line = elements[i];
                 lineLength = line.length;
                 elPosition = elements[i].indexOf(el[g]);
@@ -226,11 +222,11 @@ const markzilla = (mkz = {
             }
           }
 
-          for (var i = 0; i < elements.length; i++) {
+          for (let i = 0; i < elements.length; i++) {
             elements[i] = elements[i].replace(matchesEsc, "[");
           }
 
-          for (var i = 0; i < elements.length; i++) {
+          for (let i = 0; i < elements.length; i++) {
             element = elements[i];
             index = i;
             elements[i] = {
@@ -249,7 +245,6 @@ const markzilla = (mkz = {
 
   decon: html => {
     // goes back from html layout to .mkz
-    // why would I need this though?
   },
 
   insertPost: postObject => {
@@ -263,7 +258,7 @@ const markzilla = (mkz = {
       document.querySelector(".mkzTitle").innerHTML = title;
       document.querySelector(".mkzDate").textContent =
         parsedDate.y + " " + parsedDate.m + " " + parsedDate.d + " ";
-      for (var i = 0; i < body.length; i++) {
+      for (let i = 0; i < body.length; i++) {
         if (body[i]) {
           document.querySelector(".mkzBody").innerHTML =
             document.querySelector(".mkzBody").innerHTML + body[i];
@@ -293,7 +288,7 @@ const markzilla = (mkz = {
             body: []
           }
         };
-        for (var i = 1; i < json.length; i++) {
+        for (let i = 1; i < json.length; i++) {
           postObject[articleDate].body[i] = Object.values(json[i])[0];
         }
         resolve(postObject);

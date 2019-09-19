@@ -1,6 +1,6 @@
 #h1 [i This] is a [b markzilla] test file. This is the [sui first ever] [ib markzilla] file.
 
-#p contained in this file are some markzilla [b markup indicators]. [b Markup indicators] are things like "[\i]", "[\b]", "[\c]", "[\d]", "[\u]", "[\s]", that indicate that certain markup is meant to be handled differently by the parser.
+#p [d C]ontained in this file are some markzilla [b markup indicators]. [b Markup indicators] are things like "[\i]", "[\b]", "[\c]", "[\d]", "[\u]", "[\s]", that indicate that certain markup is meant to be handled differently by the parser.
 line in paragraph, but on a new line.
 line in paragraph, but also on a new line.
 trust me. the [a text in this file](makes/way.more) [i sense] if you read the raw [c .mkz] file as opposed to the output. if you [ibc mkz.parse()] this file, you'll see what I mean.

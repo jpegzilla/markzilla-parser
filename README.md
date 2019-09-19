@@ -1,5 +1,5 @@
 ## what is this?
-this is a parser for a markup 'language' I created called markzilla. I did it mainly as a learning exercise -- I learned everything I'll ever need to know about regex, for example. but if you need a simple markup language that outputs a JSON object full of HTML elements (and who doesn't?) then this project may be useful to you.
+this is a parser for a markup 'language' I created called markzilla. I did it mainly as a learning exercise -- I learned everything I'll ever need to know about regex, for example. but if you need a simple markup syntax(?) parser that outputs a JSON object full of HTML elements (and who doesn't?) then this project may be useful to you.
 
 no dependencies.
 
@@ -23,8 +23,8 @@ and it will give you an array of numbered JSON objects containing the parsed `.m
 `#h1 [i This] is a [b markzilla] test file. This is the [sui first ever] [ib markzilla] file.`
 
 to a line that looks like this.
-
+```html
     <h1><span class='i'>This</span> is a <span class='b'>markzilla</span> test file. This is the <span class='s u i'>first ever</span> <span class='i b'>markzilla</span> file.
 </h1>
-
-it's a pretty straightforward `.mkz` to `.html` conversion. if for some reason you *actually* want to use this, like to make blog posts on a static site or something, please feel free. and if you need help or want me to put in a new feature, please get in touch. I'm online almost 24/7 these days.
+```
+it's a pretty straightforward `.mkz` to `.html` conversion. if for some reason you *actually* want to use this, like to make blog posts on a static site or something, please feel free. I've developed a desktop application that uses this script to parse markup and output ready-to-use html, as well. that's [here,](https://github.com/jpegzilla/markzilla-app) but it's very incomplete and not documented yet.
